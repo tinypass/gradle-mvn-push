@@ -84,17 +84,17 @@ afterEvaluate { project ->
                     }
                 }
 
-				if (hasProperty('POM_DEPENDENCIES_ARTIFACT_ID_OPTIONAL')) {
-		            pom.whenConfigured { MavenPom pom ->
-		                pom.dependencies.each { dependency ->
-							POM_DEPENDENCIES_ARTIFACT_ID_OPTIONAL.split(',').each { optional ->
-			                    if (optional == dependency.artifactId) {
-			                        dependency.optional = true
-			                    }
-		                    }
-		                }
-		            }
-				}
+                if (hasProperty('POM_DEPENDENCIES_ARTIFACT_ID_OPTIONAL')) {
+                    pom.whenConfigured { MavenPom pom ->
+                        pom.dependencies.each { dependency ->
+                            POM_DEPENDENCIES_ARTIFACT_ID_OPTIONAL.split(',').each { optional ->
+                                if (optional == dependency.artifactId) {
+                                    dependency.optional = true
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -107,6 +107,7 @@ afterEvaluate { project ->
     task androidJavadocs(type: Javadoc) {
         source = android.sourceSets.main.java.srcDirs
         classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        failOnError false
     }
 
     task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
