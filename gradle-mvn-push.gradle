@@ -84,7 +84,7 @@ afterEvaluate { project ->
                     }
                 }
 
-                if (hasProperty('POM_DEPENDENCIES_ARTIFACT_ID_OPTIONAL')) {
+                if (project.hasProperty('POM_DEPENDENCIES_ARTIFACT_ID_OPTIONAL')) {
                     pom.whenConfigured { MavenPom pom ->
                         pom.dependencies.each { dep ->
                             POM_DEPENDENCIES_ARTIFACT_ID_OPTIONAL.split(',').each { optionalArtifactId ->
